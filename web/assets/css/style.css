@@ -30,10 +30,12 @@ body{
 
 .navbar{
 padding-bottom: 50px;
-
+margin-bottom: 100px;
 }	
 
 .menus{
+  position:absolute;
+  width: 100%;
   box-shadow: 0px 0px 1px black;
 }
 .header {
@@ -41,14 +43,20 @@ padding-bottom: 50px;
   height: 35px;
   background-color: var(--primary-color);
   border-bottom: 1px solid black;
+  display:flex;
+
+}
+
+.headerul{
+  display:block;
 
 }
 .lupa{
-  padding-left:763px;
-  float:left;
-  position:relative;
-  display:inline-block;
-  box-shadow: 0px 0px 1px black;
+  float:right;
+  position:absolute;
+  right:0px;
+  top:0px;
+  justify-content: space-between;
   cursor:pointer;
 }
 
@@ -66,7 +74,8 @@ padding-bottom: 50px;
 }
 
 .border{
-  box-shadow: 0px 0px 1px black;
+  border-left: solid 1px lightgray;
+  height:46px;
 }
 
 .wrapper{
@@ -100,10 +109,15 @@ border-right:solid 1px rgba(160, 160, 160, 0.3);;
 .active{
   color: gray;
   letter-spacing: 3px;
-
+  display:flex;
+  width: 100%;
   padding-left: 30px;
   padding-right: 30px;
   }
+
+.active a{
+  border-right:solid 1px rgba(160, 160, 160, 0.3);;
+}
 
 .user-img{
   margin-left: -190px;
