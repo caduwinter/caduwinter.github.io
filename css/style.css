@@ -1,0 +1,275 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;500;600&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins'
+  }
+  
+  body
+  {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(-70deg,  #202020, #000000);
+
+  }
+  
+  .container
+  {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 40px 0;
+  }
+  
+  .container .box
+  {
+    position: relative;
+    width: 300px;
+    height: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 40px 30px;
+    transition: 0.5s;
+  }
+  
+  .container .box::before
+  {
+    content:' ';
+    position: absolute;
+    top: 0;
+    left: 50px;
+    width: 50%;
+    height: 100%;
+    text-decoration: none;
+    background: #fff;
+    border-radius: 8px;
+    transform: skewX(15deg);
+    transition: 0.5s;
+  }
+  
+  .container .box::after
+  {
+    content:'';
+    position: absolute;
+    top: 0;
+    left: 50;
+    width: 50%;
+    height: 100%;
+    background: #fff;
+    border-radius: 8px;
+    transform: skewX(15deg);
+    transition: 0.5s;
+    filter: blur(25px);
+  }
+  
+  .container .box:hover:before,
+  .container .box:hover:after
+  {
+    transform: skewX(0deg);
+    left: 20px;
+    width: calc(100% - 110px);
+    
+  }
+  
+  .container .box:before,
+  .container .box:after
+  {
+    background: linear-gradient(315deg, #7229D5, #B4E5FF)
+  }
+
+  .container .box span
+  {
+    transition: 1s;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 5;
+
+    pointer-events: none;
+  }
+  .container .box:hover span::before
+  {
+    transition: 0.3s;
+    top: -50px;
+    left: 50px;
+    width: 80px;
+    height: 80px;
+    opacity: 1;
+  }
+  
+
+  .container .box span::before
+{
+  content:'';
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 35% 15%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  opacity: 0;
+
+  animation: animate 2s ease-in-out infinite;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.08)
+}
+  .container .box span::after
+  {
+
+    content:'';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    border-radius: 15% 35%;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    opacity: 0;
+    animation: animate 2s ease-in-out infinite;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    transition: 1s;
+ 
+  }
+  
+  .container .box:hover span::after
+  {
+    transition: 0.3s;
+    bottom: -50px;
+    right: 50px;
+    width: 80px;
+    height: 80px;
+    opacity: 1;
+  }
+  
+  @keyframes animate
+  {
+    0%, 100%
+    {
+      transform: translateY(10px);
+    }
+    
+    50%
+    {
+      transform: translate(-10px);
+    }
+  }
+  
+  .container .box .content
+  {
+    position: relative;
+    left: 0;
+    padding: 20px 40px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    z-index: 1;
+    transform: 0.5s;
+    transition: 0.4s;
+    color: #fff;
+  }
+  
+  .container .box:hover .content
+  {
+    transition: 0.4s;
+    left: -25px;
+    padding: 60px 40px;
+  }
+  
+  .container .box .content h2
+  {
+    font-size: 2em;
+    color: #fff;
+    margin-bottom: 10px;
+  }
+  
+  .container .box .content p
+  {
+    font-size: 1.1em;
+    margin-bottom: 10px;
+    line-height: 1.4em;
+    font-style: italic;
+  }
+
+  a, a:visited, a:hover, a:active {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .menus ul{
+      display: flex;
+      list-style: none;
+      flex-direction: column;
+      backdrop-filter: blur(20px);
+  }
+
+  .menus ul li{
+    margin:15px 20px;
+    position: relative;
+}
+
+.menus ul li img{
+    filter:drop-shadow(100%);
+    filter:blur(0px)
+}
+
+.menus ul li h4{
+    color: white;
+    margin-top:5px;
+    font-size:11px;
+    letter-spacing: 1px;
+}
+
+.menus ul div{
+    position: relative;
+    padding: 10px 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    z-index: 1;
+    transition: 0.4s;
+}
+.menus ul div:hover{
+    transition: 0.4s;
+    color: lightseagreen;
+    transform: scale(1.05);
+}
+
+.container2{
+
+}
+
+.container2 .box2{
+  position: relative;
+  width: 300px;
+  height: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 40px 30px;
+  transition: 0.5s;
+}
+
+.container2 .box2::before
+{
+  content:' ';
+  position: absolute;
+  top: 0;
+  left: 85px;
+  width: 50%;
+  height: 100%;
+  text-decoration: none;
+  background: #a1b0f3;
+  border-radius: 8px;
+  transform: skewX(15deg);
+  filter:blur(20px);
+  transition: 0.5s;
+}
