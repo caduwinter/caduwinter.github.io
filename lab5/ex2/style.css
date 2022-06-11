@@ -1,0 +1,29 @@
+body{
+    background-color: #dddddd;
+}
+.table-title{
+    display: flex;
+    padding-bottom: 10px;
+}
+.table-title h1{
+    color: #dd0000;
+    padding: 0 20px;
+}
+.table-title img{
+    width: 161.25px;
+    height: 76.5px;
+    margin-left: 50px;
+}
+.tar{
+    background-color: #dddddd;
+}
+.tar td{
+    padding: 10px;
+    color: #dd0000;
+    background-color: #ffffcc
+}
+.tar th{
+    padding: 10px;
+    color: #dd0000;
+    background-color: #fffccc;
+}
