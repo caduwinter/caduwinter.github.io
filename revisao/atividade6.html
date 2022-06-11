@@ -11,15 +11,18 @@
     <legend>Cadastro de Clientes</legend>
     <form action="/clientes" method="post">
         <label>Nome</label>
-        <input name="Nome" type="text" size="30" placeholder="Digite seu nome">
+        <br>
+        <input name="Nome" type="text" size="30" placeholder="Digite seu nome" required>
         <br><br>
         <label>Endereço</label>
-        <input name="Endereço" type="text" size="50" placeholder="Digite seu endereço">
+        <br>
+        <input name="Endereço" type="text" size="50" placeholder="Digite seu endereço" required>
         <br><br>
         <label>E-mail</label>
-        <input type="email" placeholder="Digite seu email">
+        <br>
+        <input type="email" placeholder="Digite seu email" required>
         <br><br>
-        <input type="checkbox" id="Desejo receber newsletter" name="Desejo receber newsletter">
+        <input type="checkbox" id="Desejo receber newsletter" name="Desejo receber newsletter" required>
         <label for="Desejo receber newsletter">Desejo receber newsletter</label>
         <br><br>
         <input type="submit" value="Cadastrar">
