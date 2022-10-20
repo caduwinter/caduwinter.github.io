@@ -3,6 +3,9 @@
   font-family: "Poppins";
   padding: 0;
 }
+a, u {
+  text-decoration: none;
+}
 
 :root {
   --bg-color: rgb(20, 20, 20);
