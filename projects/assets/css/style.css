@@ -4,7 +4,10 @@
   padding: 0;
 }
 a, u {
+  cursor: pointer;
   text-decoration: none;
+  color: rgb(240, 240, 240);
+  font-size: none;
 }
 
 :root {
@@ -40,7 +43,6 @@ body {
 .card {
   background-color: rgba(255, 255, 255, 0.1);
   border-radius: 10px;
-  cursor: pointer;
   display: flex;
   height: 260px;
   flex-direction: column;
@@ -63,6 +65,7 @@ body {
   top: 0px;
   transition: opacity 500ms;
   width: 100%;
+  pointer-events: none;
 }
 
 .card::before {
@@ -144,6 +147,30 @@ i {
   height: 20px;
   line-height: 20px;
 }
+
+.card-info-anchor{
+  background-color: var(--card-color);
+  border-radius: inherit;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  inset: 1px;
+  padding: 10px;
+  
+  position: absolute;
+  z-index: 2;
+}
+
+.card-info-anchor h3 {
+  font-size: 1.1em;
+  line-height: 20px;
+}
+.card-info-anchor h4 {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.85em;
+  margin-top: 8px;
+}
+
 
 .card-info-title > h3 {
   font-size: 1.1em;
