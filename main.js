@@ -1,4 +1,5 @@
-import gsap from "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js";
+import gsap from "./node_modules/gsap";
+// import * as THREE from "./node_modules/three";
 import * as THREE from "./node_modules/three";
 import vertexShader from "./shaders/vertex.glsl";
 import fragmentShader from "./shaders/fragment.glsl";
