@@ -68,7 +68,7 @@ canvas {
   padding: 0;
 
   font-weight: 100;
-  font-size: 1vw;
+  font-size: 1.5vw;
   color: rgb(212, 233, 245);
   letter-spacing: 0.2vw;
   text-align: center;
@@ -79,7 +79,7 @@ canvas {
   margin: 0;
   padding: 0;
 
-  font-size: 1.5vw;
+  font-size: 2vw;
 
   color: rgb(212, 233, 245);
   position: absolute;
