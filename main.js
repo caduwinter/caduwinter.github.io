@@ -1,5 +1,5 @@
-import gsap from "gsap";
-import * as THREE from "three";
+import gsap from "./node_modules/gsap";
+import * as THREE from "./node_modules/three";
 import vertexShader from "./shaders/vertex.glsl";
 import fragmentShader from "./shaders/fragment.glsl";
 
