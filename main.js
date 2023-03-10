@@ -1,8 +1,9 @@
 import gsap from "./node_modules/gsap";
 
 import * as THREE from "./node_modules/three/";
-import vertexShader from "./shaders/vertex.glsl";
-import fragmentShader from "./shaders/fragment.glsl";
+
+// import vertexShader from "./shaders/vertex.glsl";
+// import fragmentShader from "./shaders/fragment.glsl";
 
 // import atmosphereVertexShader from "./shaders/atmosphereVertex.glsl";
 // import atmosphereFragmentShader from "./shaders/atmosphereFragment.glsl";
@@ -10,11 +11,68 @@ import fragmentShader from "./shaders/fragment.glsl";
 // import starsVertexShader from "./shaders/starsVertex.glsl";
 // import starsFragmentShader from "./shaders/starsFragment.glsl";
 
-import atmosphereVertexShader from "./shaders/atmosphereVertex.glsl";
-import atmosphereFragmentShader from "./shaders/atmosphereFragment.glsl";
+// import atmosphereVertexShader from "./shaders/atmosphereVertex.glsl";
+// import atmosphereFragmentShader from "./shaders/atmosphereFragment.glsl";
 
-import starsVertexShader from "./shaders/starsVertex.glsl";
-import starsFragmentShader from "./shaders/starsFragment.glsl";
+// import starsVertexShader from "./shaders/starsVertex.glsl";
+// import starsFragmentShader from "./shaders/starsFragment.glsl";
+
+const vertexShader = `
+varying vec2 vertexUV;
+varying vec3 vertexNormal;
+
+void main(){
+    vertexUV = uv;
+    vertexNormal = normalize(normalMatrix * normal);
+    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+}
+`;
+
+const fragmentShader = `
+uniform sampler2D globeTexture;
+
+varying vec2 vertexUV;
+varying vec3 vertexNormal;
+
+void main(){
+    float intensity = 1.05 - dot(vertexNormal, vec3(0.0, 0.0, 1.0));
+    vec3 atmosphere = vec3(0.4, 0.6, 0.9) * pow(intensity, 1.5);
+    gl_FragColor =  vec4(atmosphere + texture2D(globeTexture,vertexUV).xyz,1.0);
+    }`;
+
+const starsVertexShader = `varying vec3 vertexNormal;
+void main(){
+    vertexNormal = normalize(normalMatrix * normal);
+    gl_PointSize = 100.0;
+}
+`;
+const starsFragmentShader = `
+varying vec3 vertexNormal;
+
+void main(){
+    float intensity = pow(1.2 - dot(vertexNormal, vec3(0,0, 1.0)), 1.8);
+    gl_FragColor =  vec4(0.3, 0.6, 1.0, 1.0) * intensity;
+    }
+`;
+
+const atmosphereVertexShader = `
+varying vec3 vertexNormal;
+
+void main(){
+    vertexNormal = normalize(normalMatrix * normal);
+    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+}
+
+`;
+const atmosphereFragmentShader = `
+varying vec3 vertexNormal;
+
+void main(){
+    float intensity = pow(0.6 - dot(vertexNormal, vec3(0,0, 1.0)), 1.8);
+    gl_FragColor =  vec4(0.3, 0.6, 1.0, 1.0) * intensity;
+    }
+
+`;
 
 import { Float32BufferAttribute } from "./node_modules/three";
 
