@@ -1,6 +1,6 @@
-import gsap from "./node_modules/gsap";
-// import * as THREE from "./node_modules/three";
-import * as THREE from "./node_modules/three";
+import gsap from "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js";
+
+import * as THREE from "https://cdnjs.cloudflare.com/ajax/libs/three.js/0.150.1/three.min.js";
 import vertexShader from "./shaders/vertex.glsl";
 import fragmentShader from "./shaders/fragment.glsl";
 
@@ -10,12 +10,16 @@ import atmosphereFragmentShader from "./shaders/atmosphereFragment.glsl";
 import starsVertexShader from "./shaders/starsVertex.glsl";
 import starsFragmentShader from "./shaders/starsFragment.glsl";
 
-import { Float32BufferAttribute } from "three";
+// import { Float32BufferAttribute } from "three";
 
-import { EffectComposer } from "./node_modules/three/examples/jsm/postprocessing/EffectComposer.js";
+// import { EffectComposer } from "./node_modules/three/examples/jsm/postprocessing/EffectComposer.js";
 
-import { RenderPass } from "./node_modules/three/examples/jsm/postprocessing/RenderPass";
-import { UnrealBloomPass } from "./node_modules/three/examples/jsm/postprocessing/UnrealBloomPass";
+// import { RenderPass } from "./node_modules/three/examples/jsm/postprocessing/RenderPass";
+// import { UnrealBloomPass } from "./node_modules/three/examples/jsm/postprocessing/UnrealBloomPass";
+
+import { EffectComposer } from "https://cdn.jsdelivr.net/npm/three-effectcomposer@0.0.1/index.min.js";
+import { RenderPass } from "https://threejs.org/examples/jsm/postprocessing/RenderPass.js";
+import { UnrealBloomPass } from "https://threejs.org/examples/jsm/postprocessing/UnrealBloomPass.js";
 
 import openSimplexNoise from "https://cdn.skypack.dev/open-simplex-noise";
 
