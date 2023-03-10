@@ -1,50 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-   <head>
-      <meta charset="UTF-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <script src="https://kit.fontawesome.com/bf312dc673.js" crossorigin="anonymous"></script>
-      <!-- Importando css -->
-      <link rel="stylesheet" href="assets/css/style.css">
-   </head>
-   <body>
-    <section>
-      <div class="color"></div>
-    <div class="menus">
-        <ul>
-            <a href="projects/index.html" target="_blank"><li><div class="sites"> <h4>Projects.</h4>  </div></a></li></li>
-        </ul>
-    </div>    
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles/main.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <title>Cadu Winter</title>
+    <script
+      async
+      src="https://unpkg.com/es-module-shims@1.6.3/dist/es-module-shims.js"
+    ></script>
 
-    <div class="container">
-        <div class="box">
-          <span></span>
-          <div class="content">
-            <h2></h2>
-            <p><a href="https://github.com/caduwinter/" target="_blank"> Carlos Eduardo T. Winter</a></p>
-          </div>
-        </div>
-      </div>  
-      <div class="menus">
-          <ul>
-            <a href="" target="_blank"><li><div class="sites"> <h4>About</h4>  </div></a></li>           
-          </ul>
-      </div>    
-     
-    </section>
-    <!-- <div class="medias">
-      <ul>
-        <li>
-        <a href="" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
-      </li>
-      <li>
-        <a href="" target="_blank"> <i class="fa-brands fa-instagram"></i></a>
-      </li>
-    </ul>
-
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://unpkg.com/three@0.150.1/build/three.module.js"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div class="homeButton"></div>
+    <div class="texts">
+      <div class="homeTexts">
+        <h1 class="title">CADUWINTER</h1>
+        <h2 class="subtitle">Web Developer</h2>
+      </div>
+      <div class="aboutTexts">
+        <p class="aboutText">
+          I'm currently studying Information Systems at CEFET-RJ, I'm
+          specializing in web development. I have solid knowledge in React,
+          TypeScript, HTML/CSS/JS, Java. I also have a knowing of VTEX. Feel
+          free to check out my portfolio and contact me using this website.
+        </p>
+      </div>
     </div>
-  -->
-    <script src="assets/js/script.js"></script>
-   </body>
+    <div class="list">
+      <p class="list-item about">ABOUT</p>
+      <p class="list-item about">PORTFOLIO</p>
+    </div>
+
+    <script type="module" src="./main.js"></script>
+    <script type="module" src="./js/points.js"></script>
+  </body>
 </html>
