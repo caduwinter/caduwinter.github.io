@@ -74,7 +74,7 @@ void main(){
 
 `;
 
-import { Float32BufferAttribute } from "./node_modules/three";
+import { Float32BufferAttribute } from "https://unpkg.com/three@0.127.0/build/three.module.js";
 
 // import { EffectComposer } from "./node_modules/three/examples/jsm/postprocessing/EffectComposer.js";
 
