@@ -87,6 +87,10 @@ import { UnrealBloomPass } from "https://threejs.org/examples/jsm/postprocessing
 
 import openSimplexNoise from "https://cdn.skypack.dev/open-simplex-noise";
 
+import { GLTFLoader } from "https://threejs.org/examples/jsm/loaders/GLTFLoader.js";
+import { DRACOLoader } from "https://threejs.org/examples/jsm/loaders/DRACOLoader.js";
+import { OBJLoader } from "https://threejs.org/examples/jsm/loaders/OBJLoader.js";
+
 console.log(vertexShader);
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(
@@ -108,6 +112,10 @@ const sphereMaterial = new THREE.ShaderMaterial({
   vertexShader,
   fragmentShader,
   uniforms: {
+    c: { type: "f", value: 0.0 },
+    p: { type: "f", value: 3.3 },
+    glowColor: { type: "c", value: new THREE.Color(0xffff00) },
+    viewVector: { type: "v3", value: camera.position },
     globeTexture: {
       value: new THREE.TextureLoader().load("./img/milky.jpg"),
     },
@@ -124,6 +132,12 @@ scene.background = new THREE.TextureLoader().load("./img/starc.jpg");
 const atmosphere = new THREE.Mesh(
   new THREE.SphereGeometry(5, 50, 50),
   new THREE.ShaderMaterial({
+    uniforms: {
+      c: { type: "f", value: 0.0 },
+      p: { type: "f", value: 3.3 },
+      glowColor: { type: "c", value: new THREE.Color(0xffff00) },
+      viewVector: { type: "v3", value: camera.position },
+    },
     vertexShader: atmosphereVertexShader,
     fragmentShader: atmosphereFragmentShader,
     blending: THREE.AdditiveBlending,
@@ -318,6 +332,8 @@ function aboutInfo(e) {
 
   isAbout = true;
 
+  homeButton.style.display = "block";
+
   homeTexts.style.display = "none";
 
   texts.style.top = "25%";
@@ -345,6 +361,7 @@ about.addEventListener("click", aboutInfo);
 
 function homePage() {
   isAbout = false;
+  homeButton.style.display = "none";
 
   texts.style.top = "50%";
 

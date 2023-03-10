@@ -11,6 +11,19 @@ body {
 canvas {
   position: absolute;
 }
+.progress-bar-container {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
 .texts {
   color: white;
@@ -79,6 +92,8 @@ canvas {
 .homeButton {
   margin: 0;
   padding: 0;
+
+  display: none;
 
   font-size: 2vw;
 
