@@ -10,6 +10,7 @@
     "gsap": "^3.11.4",
     "three": "^0.150.1",
     "vite": "^4.1.4",
-    "vite-plugin-string": "^1.2.1"
+    "vite-plugin-string": "^1.2.1",
+    "webpack-glsl-loader": "^1.0.1"
   }
 }
