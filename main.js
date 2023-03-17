@@ -1,4 +1,4 @@
-import gsap from "https://cdn.skypack.dev/gsap";
+// import gsap from "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js";
 
 import * as THREE from "https://unpkg.com/three@0.127.0/build/three.module.js";
 
@@ -135,7 +135,7 @@ const atmosphere = new THREE.Mesh(
     uniforms: {
       c: { type: "f", value: 0.0 },
       p: { type: "f", value: 3.3 },
-      glowColor: { type: "c", value: new THREE.Color(0xffff00) },
+      glowColor: { type: "c", value: new THREE.Color(0x74d5f2) },
       viewVector: { type: "v3", value: camera.position },
     },
     vertexShader: atmosphereVertexShader,
