@@ -1,7 +1,7 @@
 // import gsap from "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js";
 
 // import * as THREE from "https://unpkg.com/three@0.127.0/build/three.module.js";
-import { gsap } from "gsap";
+import gsap from "gsap";
 import * as THREE from "three";
 
 // import vertexShader from "./shaders/vertex.glsl";
