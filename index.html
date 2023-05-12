@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./styles/main.css" />
+    <link rel="stylesheet" href="./styles/project.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
@@ -12,6 +13,23 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
+
+
+
+    
+    <link
+    rel="stylesheet"
+    type="text/css"
+    href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"
+/>
+<link
+    rel="stylesheet"
+    type="text/css"
+    href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"
+/>
+
+
+
     <title>Home</title>
     <script
       async
@@ -43,18 +61,63 @@
         <p class="aboutText">
           I am currently studying Information Systems at CEFET-RJ, specializing
           in web development. I have solid knowledge of React, TypeScript,
-          HTML/CSS/JS, and Java. I also have experience with VTEX. Please feel
+          HTML/CSS/JS, Java and PHP. I also have experience with VTEX. Please feel
           free to check out my portfolio and contact me using this website.
         </p>
+      </div>
+      <div class="portfolioItems">
+        
+        <div id="cards">
+          <div class="card">
+            <a href="https://caduwinter.github.io/react-typing" class="card-anchor" target="_blank">
+              <figure class="card-figure">
+                <img src="./img/react-typing.png" class="card-img" alt="">
+              </figure>
+              <h3 class="card-title">React Typing Test</h3>
+              <h4 class="card-subtitle">Project made with React to count your WPM (WORDS PER MINUTE).</h4>
+            </a>        
+          </div>
+
+        
+          <div class="card card2">
+            <a href="#" class="card-anchor">
+              <figure class="card-figure">
+                <img src="./img/react-typing.png" class="card-img" alt="">
+              </figure>
+              <h3 class="card-title">Nothing here</h3>
+              <h4 class="card-subtitle">Coming soon...</h4>
+            </a>        
+          </div>
+          
+        </div>    
       </div>
     </div>
     <div class="list">
       <p class="list-item about">ABOUT</p>
-      <p class="list-item portfilio">PORTFOLIO</p>
+      <p class="list-item portfolio">PORTFOLIO</p>
     </div>
+
+
+
+
+    <div id="loading-screen">
+      <div id="loading-icon"></div>
+      <div id="loading-text">Loading...</div>
+    </div>
+
+
+
 
     <!-- <script type="module" src="https://caduwinter.github.io/main.js"></script> -->
     <script type="module" src="./main.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script
+        type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"
+    ></script>
+
+
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script> -->
   </body>
 </html>

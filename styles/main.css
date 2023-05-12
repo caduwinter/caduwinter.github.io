@@ -1,4 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;700&display=swap");
+
 body {
   width: 100%;
   height: 100%;
@@ -10,6 +11,8 @@ body {
 }
 canvas {
   position: absolute;
+  width: 100% !important;
+  height: 100% !important;
 }
 .progress-bar-container {
   position: absolute;
@@ -48,7 +51,8 @@ canvas {
   width: 100vw;
   text-align: center;
 
-  filter: drop-shadow(0px 6px 10px #1f363b);
+  /* filter: drop-shadow(0px 6px 10px #1f363b); */
+  filter: drop-shadow(0px 6px 10px #000);
 }
 .subtitle {
   margin: 0;
@@ -61,7 +65,8 @@ canvas {
   width: 100vw;
   text-align: center;
 
-  filter: drop-shadow(0px 6px 10px #87989c);
+  /* filter: drop-shadow(0px 6px 10px #87989c); */
+  filter: drop-shadow(0px 6px 10px #000);
 }
 .list {
   color: white;
@@ -73,20 +78,28 @@ canvas {
 
   display: flex;
   gap: 1vw;
-
-  cursor: pointer;
 }
 .list-item {
   margin: 0;
   padding: 0;
 
-  font-weight: 100;
+  cursor: pointer;
+  /* font-weight: 100;
   font-size: 1.5vw;
   color: rgb(212, 233, 245);
   letter-spacing: 0.2vw;
   text-align: center;
 
-  filter: drop-shadow(0px 6px 10px #87989c);
+  filter: drop-shadow(0px 6px 10px #87989c); */
+  font-weight: 300;
+  font-size: 1.5vw;
+
+  /* color: rgb(142 177 197); */
+  color: rgb(212, 233, 245);
+  letter-spacing: 0.2vw;
+  text-align: center;
+
+  filter: drop-shadow(0px 6px 10px #000);
 }
 
 .homeButton {
@@ -113,7 +126,7 @@ canvas {
 
   display: none;
 
-  font-weight: 100;
+  font-weight: 300;
   font-size: 1.1vw;
 
   color: rgb(212, 233, 245);
@@ -129,6 +142,9 @@ canvas {
 .aboutText p {
   margin: 0 5%;
   text-align: left;
+}
+.portfolioItems {
+  display: none;
 }
 
 @media (max-width: 768px) {

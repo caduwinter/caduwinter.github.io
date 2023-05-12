@@ -19,6 +19,8 @@ import * as THREE from "three";
 // import starsVertexShader from "./shaders/starsVertex.glsl";
 // import starsFragmentShader from "./shaders/starsFragment.glsl";
 
+const canvas = document.querySelector(".canvas");
+
 const vertexShader = `
 varying vec2 vertexUV;
 varying vec3 vertexNormal;
@@ -66,6 +68,8 @@ void main(){
 }
 
 `;
+//gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+
 const atmosphereFragmentShader = `
 varying vec3 vertexNormal;
 
@@ -75,6 +79,8 @@ void main(){
     }
 
 `;
+
+// gl_FragColor =  vec4(0.3, 0.6, 1.0, 1.0) * intensity;
 
 import { Float32BufferAttribute } from "https://unpkg.com/three@0.127.0/build/three.module.js";
 
@@ -125,11 +131,11 @@ const sphereMaterial = new THREE.ShaderMaterial({
 });
 
 const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
-console.log(sphere);
 
-scene.add(sphere);
-// scene.background = new THREE.Color(0x000000);
+// scene.add(sphere);
+// scene.background = new THREE.Color(0x0d0d0d);
 scene.background = new THREE.TextureLoader().load("./img/starc.jpg");
+// scene.background = new THREE.Color(0x171717);
 
 const atmosphere = new THREE.Mesh(
   new THREE.SphereGeometry(5, 50, 50),
@@ -154,6 +160,8 @@ group.add(sphere);
 group.add(atmosphere);
 scene.add(group);
 
+group.position.set(0.0, 0.0, -400);
+
 const starGeometry = new THREE.BufferGeometry();
 const starMaterial = new THREE.PointsMaterial({
   vertexShader: starsVertexShader,
@@ -164,22 +172,22 @@ const starMaterial = new THREE.PointsMaterial({
   // color: 0xffffff,
 });
 
-const starVertices = [];
-for (let i = 0; i < 1; i++) {
-  const x = (Math.random() - 0.5) * 2000;
-  const y = (Math.random() - 0.5) * 2000;
-  const z = -Math.random() * 2000;
-  starVertices.push(x, y, z);
-}
-starGeometry.setAttribute(
-  "position",
-  new Float32BufferAttribute(starVertices, 3)
-);
+// const starVertices = [];
+// for (let i = 0; i < 1; i++) {
+//   const x = (Math.random() - 0.5) * 2000;
+//   const y = (Math.random() - 0.5) * 2000;
+//   const z = -Math.random() * 2000;
+//   starVertices.push(x, y, z);
+// }
+// starGeometry.setAttribute(
+//   "position",
+//   new Float32BufferAttribute(starVertices, 3)
+// );
 
-const stars = new THREE.Points(starGeometry, starMaterial);
-console.log(stars);
+// const stars = new THREE.Points(starGeometry, starMaterial);
+// console.log(stars);
 
-scene.add(stars);
+// scene.add(stars);
 // group.add(stars);
 
 camera.position.z = 12;
@@ -190,6 +198,17 @@ const mouse = {
 };
 
 console.log(atmosphere);
+
+window.addEventListener("resize", onWindowResize);
+
+function onWindowResize() {
+  const width = window.innerWidth;
+  const height = window.innerHeight;
+
+  renderer.setSize(width, height);
+  camera.aspect = width / height;
+  camera.updateProjectionMatrix();
+}
 
 let noise = openSimplexNoise.makeNoise4D(Date.now());
 let clock = new THREE.Clock();
@@ -264,9 +283,8 @@ function animate() {
   sphere.rotation.y += 0.0011;
   // sphere.rotation.x += 0.0003;
   sphere.geometry.dynamic = true;
-
-  stars.position.x += Math.random() * 0.25;
-  if (!isAbout) {
+  // stars.position.x += Math.random() * 0.25;
+  if (!isAbout && !isPortfolio) {
     gsap.to(group.rotation, {
       x: -mouse.y * 0.4,
       y: -mouse.x * 0.6,
@@ -278,11 +296,51 @@ function animate() {
       duration: 3,
     });
 
-    gsap.to(stars.position, {
-      y: -mouse.y * 0.5,
-      x: -mouse.x * 0.5,
-      duration: 3,
+    // gsap.to(stars.position, {
+    //   y: -mouse.y * 0.5,
+    //   x: -mouse.x * 0.5,
+    //   duration: 3,
+    // });
+  }
+  if (isPortfolio) {
+    const cameraDistance = camera.position.z - group.position.z;
+    const mouseVector = new THREE.Vector3(mouse.x, mouse.y, cameraDistance);
+    mouseVector.unproject(camera);
+    const direction = mouseVector.sub(camera.position).normalize();
+    const distance = -camera.position.z / direction.z;
+    const finalPosition = camera.position
+      .clone()
+      .add(direction.multiplyScalar(distance));
+    gsap.to(group.position, {
+      y: finalPosition.y,
+      x: finalPosition.x,
+      z: finalPosition.z,
+      duration: 0.3,
     });
+    group.position.copy(finalPosition);
+  } else if (!isPortfolio && !isAbout) {
+    if (group.position.z == -400 || group.position.z != 0) {
+      group.visible = true;
+      gsap.to(group.position, {
+        x: 0,
+        y: 0,
+        z: 0,
+        duration: 3.5,
+      });
+    }
+    // group.position.set(0, 0, -400);
+    // gsap.to(group.position, {
+    //   y: 0,
+    //   x: 0,
+    //   z: -40,
+    //   duration: 3.5,
+    // });
+    // gsap.to(group.position, {
+    //   z: 0,
+    //   duration: 3.5,
+    // });
+
+    group.scale.set(1, 1, 1);
   }
 }
 
@@ -299,6 +357,11 @@ function onDocumentMouseDown(e) {
 addEventListener("mousemove", (e) => {
   mouse.x = (e.clientX / innerWidth) * 2 - 1;
   mouse.y = -(e.clientY / innerHeight) * 2 + 1;
+
+  // if (isPortfolio) {
+  //   sphere.position.x = mouse.x * sphere.position.z; // Ajuste o valor multiplicador para controlar a sensibilidade do movimento
+  //   sphere.position.y = mouse.y * sphere.position.z;
+  // }
 });
 
 function onDocumentMouseUp(e) {
@@ -327,16 +390,21 @@ const homeTexts = document.querySelector(".homeTexts");
 
 const aboutText = document.querySelector(".aboutText");
 
+const portfolioItems = document.querySelector(".portfolioItems");
+
 let isAbout = false;
+let isPortfolio = false;
 
 function aboutInfo(e) {
   e.preventDefault();
 
   isAbout = true;
+  isPortfolio = false;
 
   homeButton.style.display = "block";
 
   homeTexts.style.display = "none";
+  portfolioItems.style.display = "none";
 
   texts.style.top = "25%";
 
@@ -350,7 +418,10 @@ function aboutInfo(e) {
       duration: 3,
     });
   }
+  group.scale.set(1, 1, 1);
   gsap.to(group.position, {
+    x: 0,
+    y: 0,
     z: -100,
     duration: 5,
   });
@@ -363,14 +434,31 @@ about.addEventListener("click", aboutInfo);
 
 function homePage() {
   isAbout = false;
+  if (isPortfolio) {
+    group.visible = false;
+    gsap.to(group.position, {
+      z: -400,
+      duration: 0.4,
+    });
+  } else {
+    gsap.to(group.position, {
+      x: 0,
+      y: 0,
+      z: 0,
+      duration: 3,
+    });
+  }
+  isPortfolio = false;
   homeButton.style.display = "none";
 
   texts.style.top = "50%";
 
-  gsap.to(group.position, {
-    z: 0,
-    duration: 5,
-  });
+  // gsap.to(group.position, {
+  //   z: 0,
+  //   duration: 3.5,
+  // });
+  console.log(group.position);
+  console.log(group.position);
   for (let i = 0; i < newStars.length; i++) {
     gsap.to(newStars[i].position, {
       y: Math.random() * 1000 - 500,
@@ -382,10 +470,93 @@ function homePage() {
   aboutText.style.display = "none";
 
   homeTexts.style.display = "block";
+
+  portfolioItems.style.display = "none";
+}
+
+const portfolioButton = document.querySelector(".portfolio");
+
+portfolioButton.addEventListener("click", portfolioPage);
+
+function portfolioPage(e) {
+  isPortfolio = true;
+  if (isPortfolio) {
+    const cards = document.getElementById("cards");
+    homeButton.style.display = "block";
+
+    homeTexts.style.display = "none";
+    aboutText.style.display = "none";
+
+    texts.style.top = "50%";
+
+    portfolioItems.style.display = "flex";
+
+    group.scale.set(0.1, 0.1, 0.1);
+
+    if (cards) {
+      // Verifica se o jQuery e o Slick Carousel estão carregados
+      if (typeof jQuery !== "undefined" && typeof $.fn.slick !== "undefined") {
+        $(cards).not(".slick-initialized").slick({
+          prevArrow:
+            "<img class='a-left control-c prev slick-prev' src='./svgs/prevarrow.svg'>",
+          nextArrow:
+            "<img class='a-right control-c next slick-next' src='./svgs/nextarrow.svg'>",
+
+          slidesToShow: 1,
+          autoplay: false,
+          arrows: true,
+          dots: false,
+          // Adicione mais opções conforme necessário
+        });
+      }
+    }
+  }
+
+  // atmosphere.scale.set(0.15, 0.15, 0.15);
+
+  // gsap.to(group.position, {
+  //   z: -50,
+  //   duration: 0,
+  // });
 }
 
 const homeButton = document.querySelector(".homeButton");
 homeButton.innerHTML = `<i class="fa-solid fa-chevron-left"></i>`;
 homeButton.addEventListener("click", homePage);
+
+// }
+
+let loadingComplete = false;
+
+const loadingManager = new THREE.LoadingManager();
+
+loadingManager.onLoad = () => {
+  loadingComplete = true;
+  hideLoadingScreen();
+};
+
+loadingManager.onProgress = (url, itemsLoaded, itemsTotal) => {
+  const progress = itemsLoaded / itemsTotal;
+  updateLoadingScreen(progress);
+};
+
+function updateLoadingScreen(progress) {
+  // Atualize a barra de progresso ou qualquer outro elemento visual de carregamento
+  // com base no valor de progress
+}
+
+function hideLoadingScreen() {
+  const loadingScreen = document.getElementById("loading-screen");
+  loadingScreen.style.display = "none";
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+  // Código para carregar os elementos Three.js aqui
+
+  // Simulação de carregamento
+  setTimeout(() => {
+    loadingManager.onLoad();
+  }, 3000);
+});
 
 animate();
