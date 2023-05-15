@@ -364,6 +364,12 @@ addEventListener("mousemove", (e) => {
   // }
 });
 
+addEventListener("touchmove", (e) => {
+  const touchPoint = e.touches[0];
+  mouse.x = (touchPoint.clientX / window.innerWidth) * 2 - 1;
+  mouse.y = -(touchPoint.clientY / window.innerHeight) * 2 + 1;
+});
+
 function onDocumentMouseUp(e) {
   e.preventDefault();
 
