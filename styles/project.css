@@ -30,12 +30,12 @@
 .card {
   width: 50%;
   height: 800px;
-  background: rgba(98, 98, 98, 0.19);
-  border-radius: 16px;
+  background: rgba(34, 34, 34, 0.19);
+  border-radius: 8px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(2.7px);
-  border: 1px solid rgba(98, 98, 98, 0.34);
+  border: 1px solid rgba(69, 69, 69, 0.34);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -54,12 +54,12 @@
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  border-radius: 16px;
+  border-radius: 8px;
   margin: 0;
 }
 .card-img {
   /* width: 100%; */
-  border-radius: 16px;
+  border-radius: 8px;
   opacity: 80%;
 }
 .card-anchor {
@@ -68,12 +68,12 @@
 }
 .card-title {
   color: rgb(229, 241, 255);
-  font-size: 2em;
-  margin: 5px 15px;
+  font-size: 33px;
+  margin: 10px 15px 5px 15px;
 }
 .card-subtitle {
   color: rgb(164, 164, 164);
-  font-size: 1em;
+  font-size: 16px;
   font-weight: 300;
   margin: 0;
   padding: 5px 15px 20px;
@@ -115,6 +115,28 @@
   margin-top: 10px;
 }
 
+@media (max-width: 768px) {
+  #cards {
+    width: 85%;
+  }
+  .card-title {
+    font-size: 26px;
+  }
+  .card-subtitle {
+    font-size: 12px;
+  }
+}
+@media (max-width: 1024px) {
+  #cards {
+    width: 70%;
+  }
+  .card-title {
+    font-size: 30px;
+  }
+  .card-subtitle {
+    font-size: 15px;
+  }
+}
 /* /* * {
   margin: 0;
   font-family: "Poppins";

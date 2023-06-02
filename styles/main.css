@@ -77,7 +77,7 @@ canvas {
   z-index: 1;
 
   display: flex;
-  gap: 1vw;
+  gap: 1.5vw;
 }
 .list-item {
   margin: 0;
@@ -101,9 +101,13 @@ canvas {
 
   filter: drop-shadow(0px 6px 10px #000);
 }
+.list-item:hover {
+  color: rgb(91, 192, 255);
+  transition: 0.5s;
+}
 
 .homeButton {
-  margin: 0;
+  margin: 0 0 0 15px;
   padding: 0;
 
   display: none;

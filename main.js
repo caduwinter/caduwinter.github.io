@@ -256,6 +256,7 @@ const bloomPass = new UnrealBloomPass(
   0.1,
   0.1
 );
+
 composer.addPass(bloomPass);
 console.log(bloomPass);
 
