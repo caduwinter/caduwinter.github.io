@@ -68,30 +68,22 @@ void main(){
 }
 
 `;
-//gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
 
 const atmosphereFragmentShader = `
 varying vec3 vertexNormal;
 
 void main(){
-    float intensity = pow(0.6 - dot(vertexNormal, vec3(0,0, 1.0)), 1.8);
+    float intensity = pow(1 - dot(vertexNormal, vec3(0,0, 1.0)), 1.8);
     gl_FragColor =  vec4(0.3, 0.6, 1.0, 1.0) * intensity;
     }
 
 `;
 
-// gl_FragColor =  vec4(0.3, 0.6, 1.0, 1.0) * intensity;
-
-import { Float32BufferAttribute } from "https://unpkg.com/three@0.127.0/build/three.module.js";
-
-// import { EffectComposer } from "./node_modules/three/examples/jsm/postprocessing/EffectComposer.js";
-
-// import { RenderPass } from "./node_modules/three/examples/jsm/postprocessing/RenderPass";
-// import { UnrealBloomPass } from "./node_modules/three/examples/jsm/postprocessing/UnrealBloomPass";
-
 import { EffectComposer } from "https://threejs.org/examples/jsm/postprocessing/EffectComposer.js";
 import { RenderPass } from "https://threejs.org/examples/jsm/postprocessing/RenderPass.js";
 import { UnrealBloomPass } from "https://threejs.org/examples/jsm/postprocessing/UnrealBloomPass.js";
+
+import { BloomPass } from "https://threejs.org/examples/jsm/postprocessing/BloomPass.js";
 
 import openSimplexNoise from "https://cdn.skypack.dev/open-simplex-noise";
 
@@ -105,7 +97,7 @@ const camera = new THREE.PerspectiveCamera(
   75,
   window.innerWidth / window.innerHeight,
   0.1,
-  1000
+  100000
 );
 console.log(camera);
 const renderer = new THREE.WebGLRenderer({
@@ -153,11 +145,12 @@ const atmosphere = new THREE.Mesh(
   })
 );
 atmosphere.scale.set(1.1, 1.1, 1.1);
-scene.add(atmosphere);
+// scene.add(atmosphere);
 
 const group = new THREE.Group();
-group.add(sphere);
 group.add(atmosphere);
+group.add(sphere);
+
 scene.add(group);
 
 group.position.set(0.0, 0.0, -400);
@@ -210,8 +203,6 @@ function onWindowResize() {
   camera.updateProjectionMatrix();
 }
 
-let noise = openSimplexNoise.makeNoise4D(Date.now());
-let clock = new THREE.Clock();
 let newStars = [];
 var starsAll;
 function addStars() {
@@ -250,14 +241,18 @@ const composer = new EffectComposer(renderer);
 
 const renderPass = new RenderPass(scene, camera);
 composer.addPass(renderPass);
+// const bloomPass = new UnrealBloomPass(
+//   new THREE.Vector2(window.innerWidth, window.innerHeight),
+//   1.6,
+//   0.1,
+//   0.1
+// );
 const bloomPass = new UnrealBloomPass(
-  new THREE.Vector2(window.innerWidth, window.innerHeight),
-  1.6,
-  0.1,
-  0.1
+  new THREE.Vector2(window.innerWidth, window.innerHeight)
 );
 
 composer.addPass(bloomPass);
+
 console.log(bloomPass);
 
 function bloomConfig() {
@@ -348,7 +343,6 @@ function animate() {
 function onDocumentMouseDown(e) {
   e.preventDefault();
   let camdist = 12;
-
   gsap.to(camera.position, {
     z: (camdist -= 3),
     duration: 3,
