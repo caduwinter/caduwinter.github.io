@@ -69,16 +69,25 @@ void main(){
 
 `;
 
-const atmosphereFragmentShader = `
-varying vec3 vertexNormal;
+const atmosphereFragmentShader = `   varying vec3 vertexNormal;
 
-void main(){
-    float intensity = pow(1 - dot(vertexNormal, vec3(0,0, 1.0)), 1.8);
-    gl_FragColor =  vec4(0.3, 0.6, 1.0, 1.0) * intensity;
-    }
+void main() {
+    float intensity = 0.14 - dot(vertexNormal, vec3(0.0, 0.0, 1.0));
+    vec3 atmosphereColor = vec3(0.4, 0.8, 1.0);
+    vec3 finalColor = atmosphereColor * intensity;
+    gl_FragColor = vec4(finalColor, 1.0);
 
-`;
+}
+    `;
+// `
+// // varying vec3 vertexNormal;
 
+// // void main(){
+// //     float intensity = pow(1.0 - dot(vertexNormal, vec3(0,0, 1.0)), 1.8);
+// //     gl_FragColor =  vec4(0.3, 0.6, 1.0, 1.0) * intensity;
+// //     }
+
+// // `;
 import { EffectComposer } from "https://threejs.org/examples/jsm/postprocessing/EffectComposer.js";
 import { RenderPass } from "https://threejs.org/examples/jsm/postprocessing/RenderPass.js";
 import { UnrealBloomPass } from "https://threejs.org/examples/jsm/postprocessing/UnrealBloomPass.js";
@@ -91,7 +100,6 @@ import { GLTFLoader } from "https://threejs.org/examples/jsm/loaders/GLTFLoader.
 import { DRACOLoader } from "https://threejs.org/examples/jsm/loaders/DRACOLoader.js";
 import { OBJLoader } from "https://threejs.org/examples/jsm/loaders/OBJLoader.js";
 
-console.log(vertexShader);
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(
   75,
@@ -99,7 +107,7 @@ const camera = new THREE.PerspectiveCamera(
   0.1,
   100000
 );
-console.log(camera);
+
 const renderer = new THREE.WebGLRenderer({
   antialias: true,
 });
@@ -178,7 +186,7 @@ const starMaterial = new THREE.PointsMaterial({
 // );
 
 // const stars = new THREE.Points(starGeometry, starMaterial);
-// console.log(stars);
+//
 
 // scene.add(stars);
 // group.add(stars);
@@ -189,8 +197,6 @@ const mouse = {
   x: undefined,
   y: undefined,
 };
-
-console.log(atmosphere);
 
 window.addEventListener("resize", onWindowResize);
 
@@ -249,8 +255,6 @@ const bloomPass = new UnrealBloomPass(
 );
 
 composer.addPass(bloomPass);
-
-console.log(bloomPass);
 
 function bloomConfig() {
   bloomPass.exposure = 2;
@@ -423,8 +427,6 @@ function aboutInfo(e) {
     z: -100,
     duration: 5,
   });
-
-  console.log(camera.position.y);
 }
 
 const about = document.querySelector(".about");
@@ -455,8 +457,7 @@ function homePage() {
   //   z: 0,
   //   duration: 3.5,
   // });
-  console.log(group.position);
-  console.log(group.position);
+
   for (let i = 0; i < newStars.length; i++) {
     gsap.to(newStars[i].position, {
       y: Math.random() * 1000 - 500,
