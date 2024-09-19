@@ -1,23 +1,4 @@
-// import gsap from "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js";
-
-// import * as THREE from "https://unpkg.com/three@0.127.0/build/three.module.js";
-// import gsap from "gsap";
-import * as THREE from "three";
-
-// import vertexShader from "./shaders/vertex.glsl";
-// import fragmentShader from "./shaders/fragment.glsl";
-
-// import atmosphereVertexShader from "./shaders/atmosphereVertex.glsl";
-// import atmosphereFragmentShader from "./shaders/atmosphereFragment.glsl";
-
-// import starsVertexShader from "./shaders/starsVertex.glsl";
-// import starsFragmentShader from "./shaders/starsFragment.glsl";
-
-// import atmosphereVertexShader from "./shaders/atmosphereVertex.glsl";
-// import atmosphereFragmentShader from "./shaders/atmosphereFragment.glsl";
-
-// import starsVertexShader from "./shaders/starsVertex.glsl";
-// import starsFragmentShader from "./shaders/starsFragment.glsl";
+import * as THREE from "https://unpkg.com/three@0.127.0/build/three.module.js";
 
 const canvas = document.querySelector(".canvas");
 
@@ -88,17 +69,9 @@ void main() {
 // //     }
 
 // // `;
-import { EffectComposer } from "https://threejs.org/examples/jsm/postprocessing/EffectComposer.js";
-import { RenderPass } from "https://threejs.org/examples/jsm/postprocessing/RenderPass.js";
-import { UnrealBloomPass } from "https://threejs.org/examples/jsm/postprocessing/UnrealBloomPass.js";
-
-import { BloomPass } from "https://threejs.org/examples/jsm/postprocessing/BloomPass.js";
-
-import openSimplexNoise from "https://cdn.skypack.dev/open-simplex-noise";
-
-import { GLTFLoader } from "https://threejs.org/examples/jsm/loaders/GLTFLoader.js";
-import { DRACOLoader } from "https://threejs.org/examples/jsm/loaders/DRACOLoader.js";
-import { OBJLoader } from "https://threejs.org/examples/jsm/loaders/OBJLoader.js";
+import { EffectComposer } from "https://unpkg.com/three@0.150.1/examples/jsm/postprocessing/EffectComposer.js";
+import { RenderPass } from "https://unpkg.com/three@0.150.1/examples/jsm/postprocessing/RenderPass.js";
+import { UnrealBloomPass } from "https://unpkg.com/three@0.150.1/examples/jsm/postprocessing/UnrealBloomPass.js";
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(
@@ -131,6 +104,10 @@ const sphereMaterial = new THREE.ShaderMaterial({
 });
 
 const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
+
+sphereMaterial.onBeforeCompile = (shader) => {
+  console.log("Shader uniforms:", shader.uniforms);
+};
 
 // scene.add(sphere);
 // scene.background = new THREE.Color(0x0d0d0d);
@@ -244,16 +221,16 @@ addStars();
 animateStars();
 
 const composer = new EffectComposer(renderer);
-
 const renderPass = new RenderPass(scene, camera);
 composer.addPass(renderPass);
+
+// Configuração básica do UnrealBloomPass
 const bloomPass = new UnrealBloomPass(
   new THREE.Vector2(window.innerWidth, window.innerHeight),
-  1.6,
-  0.1,
-  0.1
+  1.6, // Bloom strength
+  0.1, // Bloom radius
+  0.1 // Bloom threshold
 );
-
 composer.addPass(bloomPass);
 
 function bloomConfig() {
